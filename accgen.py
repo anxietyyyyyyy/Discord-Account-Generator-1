@@ -7,7 +7,7 @@ import sys
 from colorama import Fore
 import string
 import threading
-from capmonster_python import HCaptchaTask
+from twocaptcha import TwoCaptcha
 import time
 import proxygen
 from itertools import cycle
@@ -23,9 +23,8 @@ def create(username,invite):
 
 
 
-    capmonster = HCaptchaTask("Buy ur own api key at capmonster")
-    task_id = capmonster.create_task("https://discord.com/register", "f5561ba9-8f1e-40ca-9b5b-a0b3f719ef34")
-    resultcap = capmonster.join_task_result(task_id)
+    solver = TwoCaptcha('a69536ad29461d05d8ea951f706c1c95')
+    resultcap = solver.hcaptcha(url="https://discord.com/register", sitekey="f5561ba9-8f1e-40ca-9b5b-a0b3f719ef34")
     fingerprintx = requests.get('https://discord.com/api/v9/experiments')
     fingerprintreceived = fingerprintx.json()['fingerprint']
 
@@ -39,7 +38,7 @@ def create(username,invite):
     "consent": True,
     "date_of_birth": "2000-04-01",
     "gift_code_sku_id": None,
-    "captcha_key": resultcap.get("gRecaptchaResponse"),
+    "captcha_key": resultcap,
     "promotional_email_opt_in": True
     })
     headers = {
