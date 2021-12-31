@@ -23,7 +23,7 @@ def create(username,invite):
 
 
 
-    solver = TwoCaptcha('a69536ad29461d05d8ea951f706c1c95')
+    solver = TwoCaptcha('2capkey')
     resultcap = solver.hcaptcha(url="https://discord.com/register", sitekey="f5561ba9-8f1e-40ca-9b5b-a0b3f719ef34")
     fingerprintx = requests.get('https://discord.com/api/v9/experiments')
     fingerprintreceived = fingerprintx.json()['fingerprint']
